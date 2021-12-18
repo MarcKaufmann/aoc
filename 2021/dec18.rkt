@@ -2,12 +2,6 @@
 
 (require racket/port)
 
-(define homework
-  (call-with-input-file "dec18.txt"
-    (lambda (in)
-      (for/list ([r (in-lines in)])
-        r))))
-
 ; TODO: How does Racket parse strings, i.e. could I just search and replace [] by () and ',' by ' ' and then let Racket do the parsing?
 (struct sn (left right)
   #:transparent)
@@ -54,3 +48,9 @@
     (error "Expected a ',' to separate the left from the right of the snail number, instead got " c2))
   (define r (read-right-sn in))
   (sn l r))
+
+(define homework
+  (call-with-input-file "dec18.txt"
+    (lambda (in)
+      (for/list ([r (in-lines in)])
+        (string->sn r)))))
